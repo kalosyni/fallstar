@@ -1,0 +1,9 @@
+[
+  {
+    "project_name": "Azure Demo April 2022",
+    "provider_type": "Azure",
+    "resource_type": "AKS",
+    "resource_name": "Cluster A",
+    "provisioning_type": "Terraform"
+  }
+]

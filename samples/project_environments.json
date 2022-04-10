@@ -1,0 +1,14 @@
+[
+  {
+    "project_name": "Azure Demo April 2022",
+    "resource_name": "Cluster A",
+    "environment_name": "Staging",
+    "resource_characteristics": {
+      "resource_group": "rg-demoapril22-staging-westeur",
+      "region": "West Europe"
+    },
+    "provider_characteristics": {
+      "subscription_id": "<azurefreesubscriptionid>"
+    }
+  }
+]
