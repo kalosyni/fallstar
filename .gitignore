@@ -351,3 +351,15 @@ MigrationBackup/
 
 # Local files
 /output/*
+.env
+local.sh
+
+# Terraform files
+*.tfvars
+.terraform/
+*.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.backup
+*.tfplan
+/samples/output/**/graph.png
+azurek8s

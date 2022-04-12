@@ -4,7 +4,7 @@
     "resource_name": "Cluster A",
     "environment_name": "Staging",
     "resource_characteristics": {
-      "resource_group": "rg-demoapril22-staging-westeur",
+      "resource_group": "rg-demoapril22-staging",
       "region": "West Europe"
     },
     "provider_characteristics": {

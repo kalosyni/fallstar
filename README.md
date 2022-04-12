@@ -2,7 +2,7 @@
 
 Fallstar creates and maintains infrastructure resources from a simple CLI/UI.
 
-## Introduction
+## Specify
 
 * [Design](./docs/design.md)
 

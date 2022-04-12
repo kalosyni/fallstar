@@ -15,9 +15,20 @@
 ## Data sources
 
 * Json files
-* MongoDB collection
+* MongoDB database
 
 ## Provisioners
 
 * Azure Resource Manager
-* Terraform
+* [Terraform](terraform.md)
+
+## Providers
+
+* [Azure](azure.md)
+* Rancher
+
+## Resources
+
+### Kubernetes clusters
+
+* [AKS](aks.md) (samples: Terraform)
