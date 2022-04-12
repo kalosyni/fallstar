@@ -23,7 +23,8 @@ variable "aks_service_principal_client_secret" {
   description = "Service principal client secret"
 }
 
-# Standard_D2_v2, Standard_D2as_v5
+# https://docs.microsoft.com/en-us/azure/virtual-machines/sizes
+# examples: Standard_D2_v2, Standard_D2as_v5
 variable "vm_size" {
   default = "Standard_D2as_v5"
 }

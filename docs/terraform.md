@@ -22,8 +22,11 @@ terraform --version
 # formats Terraform files
 terraform fmt
 
-# initializes the workspace and updates providers and state
+# initializes the workspace
 terraform init
+
+# upgrade the providers
+terraform init -upgrade
 
 # sets environment variables (for other configuration see the troubleshooting paragraph below)
 export TF_LOG="INFO"
