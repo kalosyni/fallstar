@@ -28,4 +28,5 @@ terraform apply --auto-approve
 
 ## References
 
+* [Configure a Linux VM with infrastructure in Azure using Terraform](https://docs.microsoft.com/en-us/azure/developer/terraform/create-linux-virtual-machine-with-infrastructure)
 * [SUSE/ha-sap-terraform-deployments](https://github.com/SUSE/ha-sap-terraform-deployments)

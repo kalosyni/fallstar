@@ -1,0 +1,5 @@
+vm_admin_username = ""
+vm_admin_password = ""
+os_publisher      = "SUSE"
+os_offer          = "sles-sap-15-sp2"
+os_sku            = "gen2"

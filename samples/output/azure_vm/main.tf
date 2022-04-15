@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "default" {
-  name     = "rg-suseapril22-staging-westeur"
-  location = "westeurope"
+  name     = var.resource_group_name
+  location = var.resource_group_location
 }
 
 resource "azurerm_virtual_network" "default" {
@@ -24,24 +24,26 @@ resource "azurerm_public_ip" "default" {
   allocation_method   = "Static"
 }
 
-resource "azurerm_lb" "default" {
-  name                = "lb-vmsuse"
+resource "azurerm_network_security_group" "default" {
+  name                = "nsg-vmuse"
   location            = azurerm_resource_group.default.location
   resource_group_name = azurerm_resource_group.default.name
 
-  frontend_ip_configuration {
-    name                 = "ipc-vmsuse-front"
-    public_ip_address_id = azurerm_public_ip.default.id
+  security_rule {
+    name                       = "SSH"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
   }
 }
 
-resource "azurerm_lb_backend_address_pool" "default" {
-  loadbalancer_id = azurerm_lb.default.id
-  name            = "bap-vmsuse"
-}
-
 resource "azurerm_network_interface" "default" {
-  count               = 2
+  count               = 1
   name                = "inetvmsuse${count.index}"
   location            = azurerm_resource_group.default.location
   resource_group_name = azurerm_resource_group.default.name
@@ -50,11 +52,17 @@ resource "azurerm_network_interface" "default" {
     name                          = "ipc-vmsuse"
     subnet_id                     = azurerm_subnet.default.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.default.id
   }
 }
 
+resource "azurerm_network_interface_security_group_association" "default" {
+  network_interface_id      = azurerm_network_interface.default.0.id
+  network_security_group_id = azurerm_network_security_group.default.id
+}
+
 resource "azurerm_managed_disk" "default" {
-  count                = 2
+  count                = 1
   name                 = "disk-vmsuse-${count.index}"
   location             = azurerm_resource_group.default.location
   resource_group_name  = azurerm_resource_group.default.name
@@ -67,25 +75,19 @@ resource "azurerm_availability_set" "avset" {
   name                         = "avset-vmsuse"
   location                     = azurerm_resource_group.default.location
   resource_group_name          = azurerm_resource_group.default.name
-  platform_fault_domain_count  = 2
-  platform_update_domain_count = 2
+  platform_fault_domain_count  = 1
+  platform_update_domain_count = 1
   managed                      = true
 }
 
 resource "azurerm_virtual_machine" "default" {
-  count                 = 2
+  count                 = 1
   name                  = "vm-vmsuse-${count.index}"
   location              = azurerm_resource_group.default.location
   availability_set_id   = azurerm_availability_set.avset.id
   resource_group_name   = azurerm_resource_group.default.name
   network_interface_ids = [element(azurerm_network_interface.default.*.id, count.index)]
   vm_size               = "Standard_D2as_v5"
-
-  # Uncomment this line to delete the OS disk automatically when deleting the VM
-  # delete_os_disk_on_termination = true
-
-  # Uncomment this line to delete the data disks automatically when deleting the VM
-  # delete_data_disks_on_termination = true
 
   storage_image_reference {
     publisher = "SUSE"
@@ -120,8 +122,8 @@ resource "azurerm_virtual_machine" "default" {
 
   os_profile {
     computer_name  = "hostname"
-    admin_username = "testadmin"
-    admin_password = "Password1234!"
+    admin_username = var.vm_admin_username
+    admin_password = var.vm_admin_password
   }
 
   os_profile_linux_config {
