@@ -8,9 +8,13 @@ indent_size = 2
 indent_style = space
 trim_trailing_whitespace = true
 
-[*.ts]
-quote_type = single
+[*.{cs,cshtml,razor}]
+indent_size = 4
 
 [*.md]
 max_line_length = 180
 trim_trailing_whitespace = false
+
+[*.sln]
+indent_size = 4
+indent_style = tab

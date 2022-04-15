@@ -41,6 +41,8 @@ echo "$(terraform output resource_group_name)"
 
 # configures access to the cluster
 echo "$(terraform output kube_config)" > ./azurek8s
+vi ./azurek8s
+chmod 600 ./azurek8s
 export KUBECONFIG=./azurek8s
 
 # makes sure you can access the cluster
