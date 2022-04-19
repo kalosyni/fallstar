@@ -87,13 +87,13 @@ resource "azurerm_virtual_machine" "default" {
   availability_set_id   = azurerm_availability_set.avset.id
   resource_group_name   = azurerm_resource_group.default.name
   network_interface_ids = [element(azurerm_network_interface.default.*.id, count.index)]
-  vm_size               = "Standard_D2as_v5"
+  vm_size               = var.vm_size
 
   storage_image_reference {
-    publisher = "SUSE"
-    offer     = "sles-sap-15-sp2"
-    sku       = "gen2"
-    version   = "latest"
+    publisher = var.os_publisher
+    offer     = var.os_offer
+    sku       = var.os_sku
+    version   = var.os_version
   }
 
   storage_os_disk {

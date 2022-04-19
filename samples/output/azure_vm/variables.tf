@@ -8,6 +8,10 @@ variable "resource_group_location" {
   description = "Resource group location"
 }
 
+variable "vm_size" {
+  default = ""
+}
+
 variable "vm_admin_username" {
   default = ""
 }

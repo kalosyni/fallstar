@@ -1,3 +1,4 @@
+vm_size           = "Standard_D2as_v5"
 vm_admin_username = ""
 vm_admin_password = ""
 os_publisher      = "SUSE"
